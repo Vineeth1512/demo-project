@@ -1,26 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Home from "./Home";
+import axios from "axios";
+class App extends React.Component {
+componentDidMount(){
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> My Name is Vineeth Kumar
+  axios.get("https://jsonplaceholder.typicode.com/posts").then((response)=>{
+    console.log(response.data);
+  }).catch((err)=>{
+    console.log(err);
+  })
 
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
 }
 
-export default App;
+  state ={
+    a:25
+    
+  }
+
+
+  changeA = (val) => {
+     
+    this.setState({ a: val });
+
+    console.log(this.state)
+  }
+  render() {
+   // var a = 10;
+    return (
+      <>
+        <h2> Hello From App Component</h2>
+         <p> a ={this.state.a} </p>
+
+       
+        { <button onClick={()=>{this.changeA(89)}}> changeA</button> }
+
+        {/* <button onClick={this.printA} >print A</button> */}
+
+
+        <Home  val1={this.state.a}  changeState ={this.changeA}  />
+      </>
+    )
+  }
+}
+export default App
